@@ -10,7 +10,7 @@ const [file, setFile] = useState(null)
 const [status ,setStatus]=useState(false)
 const[emailList ,setEmailList]=useState([])
 
-const API_URL = import.meta.env.VITE_API_URL || "https://bulkmailer-5urk.onrender.com";
+const API_URL = import.meta.env.VITE_API_URL || "https://bulkmailerr.onrender.com";
 
 const handleAdd = async () => {
     setStatus(true)
