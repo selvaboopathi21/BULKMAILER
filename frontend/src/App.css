@@ -1,0 +1,194 @@
+:root {
+	--navy: #081a3a;
+	--blue: #1478d1;
+	--sky: #62b9e9;
+	--peach: #f7d7ca;
+	--ink: #13233c;
+	--teal: #0aa58f;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+	color: var(--ink);
+}
+
+button,
+textarea,
+input {
+	font: inherit;
+}
+
+.mailer-page {
+	min-height: 100vh;
+	background: var(--sky);
+}
+
+.mailer-header {
+	padding: 22px 24px 18px;
+	background: var(--navy);
+	color: white;
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	text-align: center;
+}
+
+.mailer-content {
+	width: min(100%, 920px);
+	margin: 0 auto;
+	padding: 24px 24px 64px;
+	text-align: center;
+}
+
+.tagline {
+	margin: 0;
+	padding: 0 12px 22px;
+	color: white;
+	font-size: clamp(0.95rem, 2vw, 1.25rem);
+	font-weight: 700;
+}
+
+h1 {
+	margin: 0 0 20px;
+	color: var(--navy);
+	font-size: 1.15rem;
+}
+
+.mailer-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+}
+
+.message-label {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+}
+
+textarea {
+	width: min(100%, 760px);
+	min-height: 190px;
+	padding: 14px;
+	border: 2px solid rgba(8, 26, 58, 0.25);
+	border-radius: 6px;
+	outline: none;
+	resize: vertical;
+	background: var(--peach);
+	color: var(--ink);
+	box-shadow: 0 8px 18px rgba(8, 26, 58, 0.08);
+	transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+textarea::placeholder {
+	color: #8f746d;
+}
+
+textarea:hover {
+	border-color: var(--teal);
+}
+
+textarea:focus {
+	border-color: var(--teal);
+	background: #ffe5db;
+	box-shadow: 0 0 0 4px rgba(10, 165, 143, 0.2);
+}
+
+.file-dropzone {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	width: min(100%, 300px);
+	min-height: 64px;
+	padding: 12px 18px;
+	border: 3px dashed rgba(255, 255, 255, 0.8);
+	border-radius: 5px;
+	background: rgba(20, 120, 209, 0.28);
+	color: white;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.file-dropzone:hover,
+.file-dropzone:focus-within {
+	border-color: var(--teal);
+	background: rgba(10, 165, 143, 0.38);
+	transform: translateY(-2px);
+}
+
+.file-dropzone input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.file-icon {
+	display: grid;
+	width: 28px;
+	height: 28px;
+	place-items: center;
+	border: 2px solid currentColor;
+	border-radius: 50%;
+	font-size: 1.2rem;
+	line-height: 1;
+}
+
+.email-count {
+	margin: 0;
+	color: var(--navy);
+	font-size: 1rem;
+}
+
+.send-button {
+	min-width: 94px;
+	padding: 11px 22px;
+	border: 2px solid var(--navy);
+	border-radius: 6px;
+	background: var(--navy);
+	color: white;
+	font-weight: 800;
+	cursor: pointer;
+	transition: background 160ms ease, border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.send-button:hover:not(:disabled),
+.send-button:focus-visible:not(:disabled) {
+	border-color: var(--teal);
+	background: var(--teal);
+	box-shadow: 0 5px 0 #087361;
+	transform: translateY(-2px);
+}
+
+.send-button:focus-visible,
+.file-dropzone:focus-within {
+	outline: 3px solid rgba(255, 255, 255, 0.8);
+	outline-offset: 3px;
+}
+
+.send-button:disabled {
+	cursor: not-allowed;
+	opacity: 0.58;
+}
+
+@media (max-width: 540px) {
+	.mailer-content {
+		padding: 20px 16px 48px;
+	}
+
+	textarea {
+		min-height: 160px;
+	}
+}

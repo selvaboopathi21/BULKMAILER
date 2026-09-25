@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+    <input id="idExcel"type="file">add File </input>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>    <script>
+     const fileInput= document.getElementById("idExcel")
+     fileInput.addEventListener("change",(e)=>{
+        const file=e.target.files[0]
+
+        const reader =new FileReader()
+
+        reader.onload=(e)=>{
+            const data = e.target.result
+            const workbook= XLSX.read(data,{type:"binary"})
+            const sheetName= workbook.SheetName
+            const  workSheet =workbook.Sheets[sheetName]
+          const emailList = XLSX.utils.sheet_to_json(workSheet,{header:'A'})
+        console.log(emailList)
+        }
+        reader.readAsBinaryString(file)
+        console.log(file)
+     })
+    
+    </script>
+</html>
