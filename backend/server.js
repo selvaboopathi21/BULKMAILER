@@ -31,6 +31,22 @@ const emailCredentialSchema = new mongoose.Schema(
 const EmailCredential = mongoose.model('EmailCredential', emailCredentialSchema)
 
 async function getTransporter() {
+    const gmailUser = process.env.GMAIL_USER || process.env.EMAIL_USER
+    const gmailPass = process.env.GMAIL_PASS || process.env.EMAIL_PASS
+
+    if (gmailUser && gmailPass) {
+        return {
+            from: gmailUser.trim(),
+            transporter: nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: gmailUser.trim(),
+                    pass: gmailPass.replace(/\s+/g, '')
+                }
+            })
+        }
+    }
+
     const credentials = await EmailCredential.findOne({
         user: { $type: 'string' },
         pass: { $type: 'string' }
@@ -39,7 +55,7 @@ async function getTransporter() {
         .lean()
 
     if (!credentials) {
-        throw new Error('No email credentials found in the bulkmailer collection')
+        throw new Error('No email credentials found in the bulkmailer collection and no GMAIL_USER/GMAIL_PASS environment variables were set')
     }
 
     return {
