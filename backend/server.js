@@ -87,12 +87,16 @@ app.post('/', async (req, res) => {
     }
 })
 
-const PORT = 5000
-const MONGODB_URI = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/mongo'
+const PORT = process.env.PORT || 5000
+const MONGODB_URI = process.env.MONGO_URL || process.env.MONGO_URI
 
 async function startServer() {
     try {
-        await mongoose.connect(MONGODB_URI, { dbName: 'mongo' })
+        if (!MONGODB_URI) {
+            throw new Error('MONGO_URL or MONGO_URI environment variable is not set')
+        }
+
+        await mongoose.connect(MONGODB_URI)
         console.log('MongoDB connected')
 
         app.listen(PORT, () => {
@@ -100,6 +104,7 @@ async function startServer() {
         })
     } catch (error) {
         console.error('MongoDB connection failed:', error.message)
+        process.exit(1)
     }
 }
 
