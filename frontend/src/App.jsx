@@ -10,11 +10,13 @@ const [file, setFile] = useState(null)
 const [status ,setStatus]=useState(false)
 const[emailList ,setEmailList]=useState([])
 
+const API_URL = "https://bulkmailer-5urk.onrender.com";
+
 const handleAdd = async () => {
     setStatus(true)
     try {
 
-      const response = await axios.post("http://localhost:5000/", {msg:name,emailList:emailList});
+      const response = await axios.post(`${API_URL}/`, {msg:name,emailList:emailList});
       console.log("Server response:", response.data);
       alert("Email sent successfully!");
     } catch (error) {
